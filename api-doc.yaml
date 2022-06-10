@@ -129,13 +129,16 @@ definitions:
       type: "string"
      file:
       type: "object"
-      schema:
-       $ref: "#/definitions/FilePath"
+      properties:
+       schema:
+        $ref: "#/definitions/FilePath"
 
   FilePath:
-    path: 
+    type: "object"
+    properties:
+     path: 
       type: "string"
-    id:
+     id:
       type: "string"
      
 
