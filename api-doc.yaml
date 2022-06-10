@@ -1,0 +1,144 @@
+swagger: "2.0"
+info:
+  description: "Simplified NetlifyCMS API"
+  version: "1.0.0"
+  title: "NetlifyCMS Edited API"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "127.0.0.1:5001"
+basePath: "/"
+
+schemes:
+- "https"
+- "http"
+paths:
+ /posts/{name}:
+    get:
+     description: "Get specific post"
+     parameters:
+      - in: "path"
+        name: "name"
+        required: true
+        type: "string"
+
+     responses:
+      "200":
+        description: "succesful"
+        schema:
+         $ref: "#/definitions/PageResponse"
+       
+
+ /posts:
+    get:
+     description: "Get all posts"
+
+     responses:
+      "200":
+        description: "succesful"
+        schema:
+          type: "array"
+          items:
+           $ref: "#/definitions/PageResponse"
+
+ /pages/{name}:
+    get:
+     description: "Get specific post"
+     parameters:
+      - in: "path"
+        name: "name"
+        required: true
+        type: "string"
+
+     responses:
+      "200":
+        description: "succesful"
+        schema: 
+         $ref: "#/definitions/PageResponse"
+
+ /post/create:
+    post:
+      description: "Create Post"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        schema: 
+         $ref: "#/definitions/PostParams"
+      responses:
+        "200":
+          description: "succsful"
+          
+    
+  
+ /post/{name}/edit: 
+    post:
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "PK of post"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        schema: 
+         $ref: "#/definitions/PostParams"
+         
+      responses:
+        "200":
+          description: "succsful"
+         
+ /post/{name}/delete: 
+     get:
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "PK of post"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "succsful"
+
+
+
+definitions:
+  PostParams:
+    type: "object"
+    properties: 
+     title:
+      type: "string"
+     image:
+      type: "string"
+     content:
+      type: "string"
+     name:
+      type: "string"
+  
+      
+  PageResponse:
+    type: "object"
+    properties: 
+     
+     data:
+      type: "string"
+     file:
+      type: "object"
+      schema:
+       $ref: "#/definitions/FilePath"
+
+  FilePath:
+    path: 
+      type: "string"
+    id:
+      type: "string"
+     
+
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
