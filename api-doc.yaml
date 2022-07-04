@@ -16,6 +16,67 @@ schemes:
 - "https"
 - "http"
 paths:
+ /media/{mediaId}:
+    get:
+     description: "Get specific post"
+     parameters:
+      - in: "path"
+        name: "mediaId"
+        required: true
+        type: "string"
+
+     responses:
+      "200":
+        description: "succesful"
+        schema:
+         $ref: "#/definitions/PageResponse"
+  
+ /media/create:
+    post:
+      description: "Upload media"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        schema: 
+         $ref: "#/definitions/PostParams"
+      responses:
+        "200":
+          description: "succesful"
+          
+ /media/{mediaId}/put: 
+    put:
+      parameters:
+      - name: "mediaId"
+        in: "path"
+        description: "PK of post"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        schema: 
+         $ref: "#/definitions/PostParams"
+         
+      responses:
+        "200":
+          description: "succesful"
+          
+ 
+ /media/{mediaId}/delete: 
+     delete:
+      parameters:
+      - name: "mediaId"
+        in: "path"
+        description: "PK of post"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "succesful"
+          
+ 
  /posts/{name}:
     get:
      description: "Get specific post"
